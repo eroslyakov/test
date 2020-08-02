@@ -1,0 +1,15 @@
+node_modules/
+build/
+dist/
+artifacts/
+output/
+
+.vs/
+.vscode/
+.git
+
+npm-debug.log
+yarn-error.log
+*.jsbundle
+
+.jest

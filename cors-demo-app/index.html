@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <p>
+      <label for="password">
+        Password:
+        <input type="text" id="password" />
+      </label>
+    </p>
+    <button class="loginButton">Log in</button>
+    <button class="publicButton">Public</button>
+    <button class="privateButton">Private</button>
+    <script>
+      document
+        .querySelector(".loginButton")
+        .addEventListener("click", function () {
+          fetch("/login", {
+            method: "post",
+            credentials: "include",
+            headers: new Headers({
+              "Content-Type": "application/json",
+            }),
+            body: JSON.stringify({
+              password: document.getElementById("password").value,
+            }),
+          })
+            .then((response) => response.text())
+            .then((result) => {
+              alert(result);
+              window.location.reload();
+            });
+        });
+      document.querySelector(".publicButton").addEventListener("click", () => {
+        fetch("http://localhost:3000/public", {
+          'Content-Type': 'application/json'
+        })
+          .then((resp) => resp.json())
+          .then((res) => (document.body.textContent = res.message));
+      });
+      document.querySelector(".privateButton").addEventListener("click", () => {
+        fetch("http://localhost:3000/private", {
+          credentials: 'include'
+        })
+          .then((resp) => resp.text())
+          .then((res) => {
+            let output = document.createElement("p");
+            output.textContent = res;
+            document.body.append(output);
+          });
+      });
+    </script>
+  </body>
+</html>

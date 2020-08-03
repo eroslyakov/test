@@ -20,3 +20,6 @@ manifest/
 
 # yoman file
 .yo-rc.json
+
+# secrets
+*.secret.json
